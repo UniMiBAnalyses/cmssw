@@ -16,9 +16,11 @@ ecalLocalRecoAOD = cms.PSet(
 #RECO content
 ecalLocalRecoRECO = cms.PSet(
     outputCommands = cms.untracked.vstring(
+        'keep *_ecalUncalibRecHitPhase2_*_*',
+        'keep *_ecalMultiFitUncalibRecHit_*_*',
         'keep *_ecalPreshowerRecHit_*_*', 
         'keep *_ecalRecHit_*_*',
-        'keep *_ecalCompactTrigPrim_*_*',
+        # 'keep *_ecalCompactTrigPrim_*_*',
         'keep *_ecalTPSkim_*_*',
         'keep EBSrFlagsSorted_ecalDigis__*',
         'keep EESrFlagsSorted_ecalDigis__*')

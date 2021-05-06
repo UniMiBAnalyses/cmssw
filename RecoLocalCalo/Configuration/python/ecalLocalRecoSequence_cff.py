@@ -4,15 +4,17 @@ import FWCore.ParameterSet.Config as cms
 from RecoLocalCalo.EcalRecProducers.ecalRecHitTPGConditions_cff import *
 
 # ECAL reconstruction
+from RecoLocalCalo.EcalRecProducers.ecalUncalibRecHitPhase2_cff import *
 from RecoLocalCalo.EcalRecProducers.ecalMultiFitUncalibRecHit_cff import *
 from RecoLocalCalo.EcalRecProducers.ecalRecHit_cfi import *
 from RecoLocalCalo.EcalRecProducers.ecalPreshowerRecHit_cfi import *
 from RecoLocalCalo.EcalRecProducers.ecalDetIdToBeRecovered_cfi import *
-from RecoLocalCalo.EcalRecProducers.ecalCompactTrigPrim_cfi import *
+# from RecoLocalCalo.EcalRecProducers.ecalCompactTrigPrim_cfi import *
 from RecoLocalCalo.EcalRecProducers.ecalTPSkim_cfi import *
 from RecoLocalCalo.EcalRecProducers.ecalDetailedTimeRecHit_cfi import *
 
 ecalUncalibRecHitTask = cms.Task(
+    ecalUncalibRecHitPhase2Task,
     ecalMultiFitUncalibRecHitTask,
     ecalDetIdToBeRecovered)
 
@@ -25,7 +27,7 @@ ecalRecHitNoTPTask = cms.Task(
 ecalRecHitNoTPSequence = cms.Sequence(ecalRecHitNoTPTask)
 
 ecalRecHitTask = cms.Task(
-    ecalCompactTrigPrim,
+    # ecalCompactTrigPrim,
     ecalTPSkim,
     ecalRecHitNoTPTask)
 
@@ -50,7 +52,8 @@ from Configuration.Eras.Modifier_phase2_timing_cff import phase2_timing
 phase2_timing.toReplaceWith( ecalRecHitTask, _phase2_timing_ecalRecHitTask )
 
 # FastSim modifications
-_fastSim_ecalRecHitTask = ecalRecHitTask.copyAndExclude([ecalCompactTrigPrim,ecalTPSkim])
+# _fastSim_ecalRecHitTask = ecalRecHitTask.copyAndExclude([ecalCompactTrigPrim,ecalTPSkim])
+_fastSim_ecalRecHitTask = ecalRecHitTask.copyAndExclude([ecalTPSkim])
 _fastSim_ecalUncalibRecHitTask = ecalUncalibRecHitTask.copyAndExclude([ecalDetIdToBeRecovered])
 from Configuration.Eras.Modifier_fastSim_cff import fastSim
 fastSim.toReplaceWith(ecalRecHitTask, _fastSim_ecalRecHitTask)
