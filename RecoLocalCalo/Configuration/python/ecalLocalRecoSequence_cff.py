@@ -14,9 +14,9 @@ from RecoLocalCalo.EcalRecProducers.ecalTPSkim_cfi import *
 from RecoLocalCalo.EcalRecProducers.ecalDetailedTimeRecHit_cfi import *
 
 ecalUncalibRecHitTask = cms.Task(
-    ecalUncalibRecHitPhase2Task,
-    ecalMultiFitUncalibRecHitTask,
-    ecalDetIdToBeRecovered)
+    ecalUncalibRecHitPhase2Task)#,
+    # ecalMultiFitUncalibRecHitTask,
+    # ecalDetIdToBeRecovered)
 
 ecalUncalibRecHitSequence = cms.Sequence(ecalUncalibRecHitTask)
 
@@ -34,14 +34,14 @@ ecalRecHitTask = cms.Task(
 ecalRecHitSequence = cms.Sequence(ecalRecHitTask)
 
 ecalLocalRecoTask = cms.Task(
-    ecalUncalibRecHitTask,
-    ecalRecHitTask)
+    ecalUncalibRecHitTask)#,
+    # ecalRecHitTask)
 
 ecalLocalRecoSequence = cms.Sequence(ecalLocalRecoTask)
 
 ecalOnlyLocalRecoTask = cms.Task(
-    ecalUncalibRecHitTask,
-    ecalRecHitNoTPTask)
+    ecalUncalibRecHitTask)#,
+#    ecalRecHitNoTPTask)
 
 ecalOnlyLocalRecoSequence = cms.Sequence(ecalOnlyLocalRecoTask)
 

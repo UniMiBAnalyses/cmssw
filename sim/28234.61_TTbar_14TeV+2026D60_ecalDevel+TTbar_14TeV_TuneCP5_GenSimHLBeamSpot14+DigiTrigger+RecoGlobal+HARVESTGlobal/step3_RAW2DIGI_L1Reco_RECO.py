@@ -164,8 +164,7 @@ process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:phase2_realistic_T15', ''
 
 # Path and EndPath definitions
 process.L1Reco_step = cms.Path(process.L1Reco)
-process.reconstruction_step = cms.Path(process.reconstruction)
-# process.reconstruction_step = cms.Path(cms.Sequence(cms.Task(process.ecalMultiFitUncalibRecHit)))
+process.reconstruction_step = cms.Path(process.reconstruction_ecalOnly)
 
 process.FEVTDEBUGHLToutput_step = cms.EndPath(process.FEVTDEBUGHLToutput)
 # process.MINIAODSIMoutput_step = cms.EndPath(process.MINIAODSIMoutput)

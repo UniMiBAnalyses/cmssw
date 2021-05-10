@@ -57,7 +57,13 @@ from RecoEgamma.EgammaPhotonProducers.conversionOpenTrackSequence_cff import *
 from RecoEgamma.EgammaPhotonProducers.gsfTracksOpenConversionSequence_cff import *
 
 
-localrecoTask = cms.Task(bunchSpacingProducer,trackerlocalrecoTask,muonlocalrecoTask,calolocalrecoTask,castorreco)
+localrecoTask = cms.Task(
+    bunchSpacingProducer,
+    #trackerlocalrecoTask,
+    #muonlocalrecoTask,
+    calolocalrecoTask,
+    #castorreco
+)
 localreco = cms.Sequence(localrecoTask)
 localreco_HcalNZSTask = cms.Task(bunchSpacingProducer,trackerlocalrecoTask,muonlocalrecoTask,calolocalrecoTaskNZS,castorreco)
 localreco_HcalNZS = cms.Sequence(localreco_HcalNZSTask)
@@ -200,7 +206,7 @@ fastSim.toReplaceWith(highlevelrecoTask,_fastSim_highlevelrecoTask)
 from FWCore.Modules.logErrorHarvester_cfi import *
 
 # "Export" Section
-reconstructionTask     = cms.Task(localrecoTask,globalrecoTask,highlevelrecoTask,logErrorHarvester)
+reconstructionTask     = cms.Task(localrecoTask)#,globalrecoTask,highlevelrecoTask,logErrorHarvester)
 reconstruction         = cms.Sequence(reconstructionTask)
 
 #logErrorHarvester should only wait for items produced in the reconstruction sequence
@@ -223,11 +229,11 @@ reconstruction_pixelTrackingOnly = cms.Sequence(reconstruction_pixelTrackingOnly
 
 reconstruction_ecalOnlyTask = cms.Task(
     bunchSpacingProducer,
-    offlineBeamSpot,
+#    offlineBeamSpot,
     ecalOnlyLocalRecoTask,
-    pfClusteringPSTask,
-    pfClusteringECALTask,
-    particleFlowSuperClusterECALOnly
+#    pfClusteringPSTask,
+#    pfClusteringECALTask,
+#    particleFlowSuperClusterECALOnly
 )
 reconstruction_ecalOnly = cms.Sequence(reconstruction_ecalOnlyTask)
 

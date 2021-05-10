@@ -20,7 +20,7 @@ from RecoLocalCalo.Configuration.hcalGlobalReco_cff import *
 #
 # sequence CaloLocalReco and CaloGlobalReco
 #
-calolocalrecoTask = cms.Task(ecalLocalRecoTask,hcalLocalRecoTask)
+calolocalrecoTask = cms.Task(ecalLocalRecoTask)#,hcalLocalRecoTask)
 calolocalreco = cms.Sequence(calolocalrecoTask)
 
 from RecoLocalCalo.HcalRecProducers.HcalHitSelection_cfi import *
@@ -37,5 +37,5 @@ from RecoLocalCalo.Configuration.hgcalLocalReco_cff import *
 _phase2_calolocalrecoTask = calolocalrecoTask.copy()
 _phase2_calolocalrecoTask.add(hgcalLocalRecoTask)
 
-from Configuration.Eras.Modifier_phase2_hgcal_cff import phase2_hgcal
-phase2_hgcal.toReplaceWith( calolocalrecoTask , _phase2_calolocalrecoTask )
+#from Configuration.Eras.Modifier_phase2_hgcal_cff import phase2_hgcal
+#phase2_hgcal.toReplaceWith( calolocalrecoTask , _phase2_calolocalrecoTask )

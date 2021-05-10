@@ -87,6 +87,8 @@ void EcalUncalibRecHitPhase2AnalyticFitProducer::produce(edm::Event& evt, const 
     std::vector<float> adctrace;
     
     int nSamples = digi.size();
+
+    //std::cout << "digi.size = " << nSamples << std::endl;
     
     for (int sample = 0; sample < nSamples; ++sample){
       
@@ -100,16 +102,15 @@ void EcalUncalibRecHitPhase2AnalyticFitProducer::produce(edm::Event& evt, const 
       
     }// loop on samples
     
-    TGraph g(adctrace.size(), &timetrace[0], &adctrace[0]);//cannot create TGraph from vectors
-    g.Fit("fitfunc","Q"); // this makes some strange outputs
+//    TGraph g(adctrace.size(), &timetrace[0], &adctrace[0]);//cannot create TGraph from vectors
+//    g.Fit("fitfunc","Q"); // this makes some strange outputs  
+    float amp  = 100;//fitfunc.GetParameter(0);
+    float amp_e= 1;//fitfunc.GetParError(0);
+    float t0   = 0;//fitfunc.GetParameter(1);
+    float t0_e = 0;//fitfunc.GetParError(1);
     
-    float amp  = fitfunc.GetParameter(0);
-    float amp_e= fitfunc.GetParError(0);
-    float t0   = fitfunc.GetParameter(1);
-    float t0_e = fitfunc.GetParError(1);
-    
-    float ped  = fitfunc.GetParameter(4);
-    float chi2 = fitfunc.GetChisquare()/fitfunc.GetNDF();   // should retrieve reduced chi2  
+    float ped  = 0;//fitfunc.GetParameter(4);
+    float chi2 = 0;//fitfunc.GetChisquare()/fitfunc.GetNDF();   // should retrieve reduced chi2  
     
     uint32_t flags =0; // should mark gain switch
     

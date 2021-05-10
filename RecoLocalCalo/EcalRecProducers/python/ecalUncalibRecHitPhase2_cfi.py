@@ -4,7 +4,7 @@ ecalUncalibRecHitPhase2 = cms.EDProducer('EcalUncalibRecHitPhase2AnalyticFitProd
     EBhitCollection = cms.string('EcalUncalibRecHitsEB'),
     tRise = cms.double(0.2),
     tFall = cms.double(2.),
-    BarrelDigis = cms.InputTag("simEcalUnsuppressedDigis","","DIGI")
+    BarrelDigis = cms.InputTag("simEcalUnsuppressedDigis","")#,"DIGI")
 )
 
 
