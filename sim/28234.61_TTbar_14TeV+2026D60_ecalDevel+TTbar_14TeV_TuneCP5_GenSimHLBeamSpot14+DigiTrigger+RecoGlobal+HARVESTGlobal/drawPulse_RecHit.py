@@ -78,16 +78,19 @@ for event in events:
     
     # EB
     if ieta != -99 :
+      somma = 0
       for isample in range (16) :
         #                                                             0xFFF = 4095
         gr.SetPoint(isample,isample*6.25,  ((ebdigi[ideb][isample]) & 0xFFF) )
+        somma = somma + ((ebdigi[ideb][isample]) & 0xFFF)
       
       for ebrechit in ebrechits :       # in ogni evento ho il valore di ampiezza per ogni cristallo ma a me serve solo
         if ebrechit.id()() == cmssw_id: # il cristallo (ieta*iphi), anche se al momento non fa differenza dato che hanno tutti amp = 100
           print " found EB"
           amplitude = ebrechit.amplitude()
           print " amplitude = ", ebrechit.amplitude()
-                
+
+    print " integrale sotto l'impulso = ", somma
     #---- pulse
 
     color = ROOT.kBlue
