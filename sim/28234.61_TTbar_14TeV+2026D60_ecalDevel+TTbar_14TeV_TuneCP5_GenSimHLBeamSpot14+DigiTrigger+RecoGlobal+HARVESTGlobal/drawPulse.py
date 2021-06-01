@@ -1,7 +1,6 @@
 import ROOT
 from DataFormats.FWLite import Events, Handle
 
-
 from optparse import OptionParser
 parser = OptionParser()
 parser.add_option("--ieta", dest="ieta", default = -99, help = "ieta", type = 'int')
@@ -48,8 +47,6 @@ ideb = -1
 
 cmssw_id = -1
 
-maxADC = 0
-
 if ieta != -99 :
   ideb     = map_EB [ (ieta, iphi) ] [0]
   cmssw_id = map_EB [ (ieta, iphi) ] [1]
@@ -62,38 +59,39 @@ for event in events:
     event.getByLabel (labelEB, handleEB)
     ebdigi = handleEB.product()
 
-    gr = ROOT.TGraph()
-    gr.Clear()
+    dataFrame = EcalDataFrame_Ph2 (ebdigi)
+
+    # gr = ROOT.TGraph()
+    # gr.Clear()
     
-    # EB
-    if ieta != -99 :
-      for isample in range (16) :    
-        #                                                           0xFFF = 4095
-        gr.SetPoint(isample,isample*6.25,  ((ebdigi[ideb][isample]) & 0xFFF) )
+    # # EB
+    # if ieta != -99 :
+    #   for isample in range (16) :    
+    #     #                                                           0xFFF = 4095
+    #     gr.SetPoint(isample,isample*6.25,  ((ebdigi[ideb][isample]) & 0xFFF) )
         
-        ADC = ((ebdigi[ideb][isample]) & 0xFFF)
-        
-        if ADC > maxADC:
-            maxADC = ADC
+    #     ADC = ((ebdigi[ideb][isample]) & 0xFFF)
+
+    #     print ADC 
               
     #---- pulse
     
-    color = ROOT.kBlue
+#     color = ROOT.kBlue
 
-    gr.SetMarkerColor(color)
-    gr.SetLineColor  (color)
+#     gr.SetMarkerColor(color)
+#     gr.SetLineColor  (color)
     
-    gr.SetMarkerSize(3)
-    gr.SetMarkerStyle(20)
+#     gr.SetMarkerSize(3)
+#     gr.SetMarkerStyle(20)
 
-    mg.Add(gr)
+#     mg.Add(gr)
 
 
-print " ieta = ", ieta, "   iphi = ", iphi, " ==> max ADC count = ", maxADC
+# print " ieta = ", ieta, "   iphi = ", iphi, " ==> max ADC count = ", maxADC
 
-cc = ROOT.TCanvas("cc","pulse", 800, 600) 
-mg.Draw("apl")
-mg.GetXaxis().SetTitle("time [ns]")
-mg.GetYaxis().SetTitle("ADC count")
+# cc = ROOT.TCanvas("cc","pulse", 800, 600) 
+# mg.Draw("apl")
+# mg.GetXaxis().SetTitle("time [ns]")
+# mg.GetYaxis().SetTitle("ADC count")
 
-mg.SaveAs("mg.root") 
+# mg.SaveAs("mg.root") 
