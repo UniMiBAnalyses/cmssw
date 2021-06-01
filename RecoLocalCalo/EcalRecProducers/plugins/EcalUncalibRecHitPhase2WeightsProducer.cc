@@ -3,6 +3,7 @@
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/EventSetup.h"
 #include "FWCore/Framework/interface/ConsumesCollector.h"
+
 #include "DataFormats/EcalDigi/interface/EcalDigiCollections.h"
 #include "CondFormats/EcalObjects/interface/EcalCATIAGainRatios.h"
 #include "CondFormats/DataRecord/interface/EcalCATIAGainRatiosRcd.h"
@@ -65,7 +66,8 @@ void EcalUncalibRecHitPhase2WeightsProducer::produce(edm::Event& evt, const edm:
     bool g1 = false; 
     std::vector<float> timetrace;
     std::vector<float> adctrace;
-    std::vector<int> weights (16,1);
+    // std::vector<int> weights (16,1);
+    std::vector<double> weights = {0.00403987,0.00538649, 0.00628424, 0.0300746,0.270671, 0.452465, 0.360895, 0.190772, 0.0758598, 0.0260347, 0.0121196, 0.00897749, 0.00763086, 0.00673312, 0.00718199, 0.00583537};
     
     int nSamples = digi.size();
     
@@ -76,6 +78,7 @@ void EcalUncalibRecHitPhase2WeightsProducer::produce(edm::Event& evt, const edm:
     for (int sample = 0; sample < nSamples; ++sample){
       
       EcalLiteDTUSample thisSample = dataFrame[sample];
+      //gratio = 1;
       gratio = gainRatios[thisSample.gainId()];
       adctrace.push_back(thisSample.adc()*gratio);
 

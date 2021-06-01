@@ -31,9 +31,9 @@ cmssw_id = -1
 
 for event in events:
   maxADC = 0
+  print "num_events = ", num_events
   num_events += 1
 
-  print "num_events = ", num_events
 
   ieta = -85
 
@@ -60,8 +60,6 @@ for event in events:
 
           if ADC > 100:
             print "Ho trovato un conteggio ADC maggiore di 100 = ", ADC, " con:  ieta = ", ieta, "   iphi = ", iphi
-            print "isample = ", isample
-            print "ideb = ", ideb, "\n"
 
           if ADC > maxADC:
             maxADC = ADC
@@ -72,4 +70,4 @@ for event in events:
     if ieta == 0:
       ieta = ieta + 1
     if ieta == 86:
-      print "Il massimo conteggio ADC che ho trovato nell'evento ", num_events, " e' ", maxADC
+      print "Il massimo conteggio ADC che ho trovato nell'evento ", num_events-1, " e' ", maxADC

@@ -68,9 +68,6 @@ for event in events:
     event.getByLabel (labelRechitEB, handleRechitEB)
     ebrechits = handleRechitEB.product()
 
-    gr_amplitude = ROOT.TGraph()
-    gr_amplitude.Clear()
-
     gr = ROOT.TGraph()
     gr.Clear()
 
@@ -101,20 +98,7 @@ for event in events:
     gr.SetMarkerSize(3)
     gr.SetMarkerStyle(20)
 
-    mg.Add(gr)
-
-    #---- amplitude
-
-    gr_amplitude.SetPoint(0, 5*6.25, amplitude )  # per chiarezza, disegno l'ampiezza nel punto del picco ADC
-
-    gr_amplitude.SetMarkerColor(ROOT.kMagenta)
-    gr_amplitude.SetLineColor  (ROOT.kMagenta)
-
-    gr_amplitude.SetMarkerSize(3)
-    gr_amplitude.SetMarkerStyle(34)
-
-    mg.Add(gr_amplitude)
-   
+    mg.Add(gr)   
 
 cc = ROOT.TCanvas("cc","pulse", 800, 600) 
 mg.Draw("apl")
