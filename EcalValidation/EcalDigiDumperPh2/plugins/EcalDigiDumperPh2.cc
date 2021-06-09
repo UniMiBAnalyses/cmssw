@@ -122,10 +122,10 @@ private:
   float _gain[61200][16];
 };
 
-EcalDigiDumperPh2::EcalDigiDumperPh2(const edm::ParameterSet& iConfig)
+EcalDigiDumperPh2::EcalDigiDumperPh2(const edm::ParameterSet& iConfig) {
     
   //now do what ever initialization is needed
-    usesResource("TFileService");
+  usesResource("TFileService");
   edm::Service<TFileService> fs;
   
   _token_rechits = consumes<EcalUncalibratedRecHitCollection>(iConfig.getParameter<edm::InputTag>("EcalRecHitsEBCollection"));

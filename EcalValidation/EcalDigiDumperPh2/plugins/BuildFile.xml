@@ -16,7 +16,7 @@
 <use name="Geometry/EcalMapping"/>
 <use name="Geometry/CaloTopology"/>
 
-
+<use name="FWCore/ServiceRegistry"/>
 
 
 <flags EDM_PLUGIN="1"/>
