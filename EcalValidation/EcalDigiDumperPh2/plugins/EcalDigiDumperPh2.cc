@@ -118,7 +118,7 @@ private:
   float _amplitude[61200];
   int   _ieta[61200];
   int   _iphi[61200];
-  float _adc_g1[61200][16];
+  float _adc[61200][16];
   float _gain[61200][16];
 };
 
@@ -128,7 +128,7 @@ EcalDigiDumperPh2::EcalDigiDumperPh2(const edm::ParameterSet& iConfig) {
   usesResource("TFileService");
   edm::Service<TFileService> fs;
   
-  _token_rechits = consumes<EcalUncalibratedRecHitCollection>(iConfig.getParameter<edm::InputTag>("EcalRecHitsEBCollection"));
+  _token_rechits = consumes<EcalUncalibratedRecHitCollection>(iConfig.getParameter<edm::InputTag>("EcalUncalibRecHitsEBCollection"));
   _token_digi = consumes<EBDigiCollectionPh2>(iConfig.getParameter<edm::InputTag>("EBDigiCollectionPh2"));
   
   _outTree = fs->make<TTree>("tree","tree");
@@ -137,7 +137,7 @@ EcalDigiDumperPh2::EcalDigiDumperPh2(const edm::ParameterSet& iConfig) {
   _outTree->Branch("ieta",                _ieta,                "ieta[61200]/I");
   _outTree->Branch("iphi",                _iphi,                "iphi[61200]/I");
   
-  _outTree->Branch("adc_g1",             _adc_g1,                  "adc_g1[61200][16]/I"); // CONTROLLA
+  _outTree->Branch("adc",             _adc,                  "adc[61200][16]/I"); // CONTROLLA
   _outTree->Branch("gain",             _gain,                  "gain[61200][16]/I");
   
 
@@ -177,7 +177,7 @@ void EcalDigiDumperPh2::analyze(const edm::Event& iEvent, const edm::EventSetup&
     _iphi[ixtal] = -999;
 
     for (int isample=0; isample < 16; isample++) {
-      _adc_g1[ixtal][isample]=-999;
+      _adc[ixtal][isample]=-999;
       _gain[ixtal][isample]=-999;
     }
   }
@@ -192,7 +192,7 @@ void EcalDigiDumperPh2::analyze(const edm::Event& iEvent, const edm::EventSetup&
 
     for (int sample = 0; sample < 16; ++sample){
       EcalLiteDTUSample thisSample = dataFrame[sample];
-      _adc_g1[index][sample] = thisSample.adc();
+      _adc[index][sample] = thisSample.adc();
       _gain[index][sample] = gainRatios[thisSample.gainId()];
     }
   }
