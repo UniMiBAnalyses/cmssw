@@ -1,0 +1,1 @@
+`cmsRun runDump.py  inputFiles=file:/eos/home-b/bpinolin/ECALPh2/step3.root outputFile=test.root   maxEvents=10`
