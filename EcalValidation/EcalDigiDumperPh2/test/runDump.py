@@ -1,4 +1,4 @@
-# cmsRun runDump.py  inputFiles=file:/eos/home-b/bpinolin/ECALPh2/step3.root outputFile=test.root   maxEvents=10
+# cmsRun runDump.py  inputFiles=file:/eos/home-b/bpinolin/ECALPh2/step3.root outputFile=test.root
 # test reco and dump into a tree
 
 import FWCore.ParameterSet.Config as cms
