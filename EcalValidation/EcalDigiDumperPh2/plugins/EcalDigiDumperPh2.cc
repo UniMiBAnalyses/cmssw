@@ -119,7 +119,7 @@ private:
   int   _ieta[61200];
   int   _iphi[61200];
   float _adc[61200][16];
-  float _gain[61200][16];
+  int _gain[61200][16];
 };
 
 EcalDigiDumperPh2::EcalDigiDumperPh2(const edm::ParameterSet& iConfig) {
@@ -137,8 +137,8 @@ EcalDigiDumperPh2::EcalDigiDumperPh2(const edm::ParameterSet& iConfig) {
   _outTree->Branch("ieta",                _ieta,                "ieta[61200]/I");
   _outTree->Branch("iphi",                _iphi,                "iphi[61200]/I");
   
-  _outTree->Branch("adc",             _adc,                  "adc[61200][16]/I"); // CONTROLLA
-  _outTree->Branch("gain",             _gain,                  "gain[61200][16]/I");
+  _outTree->Branch("adc",             _adc,                  "adc[61200][16]/F");
+  _outTree->Branch("gain",             _gain,                  "gain[61200][16]/F");
   
 
 }
